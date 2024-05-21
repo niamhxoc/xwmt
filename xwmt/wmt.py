@@ -49,8 +49,10 @@ class wmt:
             "lev_outer" not in self.ds
         ):  # TODO: Find a better way to check vertical dimensions using both lev_outer and lev
             self.ds["lev_outer"] = xr.DataArray(np.insert(np.append(ds['lev'][:-1].values + (ds['lev'][1:].values-ds['lev'][:-1].values)/2, 6000),0,0), dims='lev_outer')
-            
+
+        print(self.ds)
         self.xgrid = get_xgcm_grid_vertical(self.ds, periodic=False)
+        print(self.xgrid)
         self.Cp = Cp
         self.rho = rho
         if alpha is not None:
