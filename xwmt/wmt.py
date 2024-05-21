@@ -171,15 +171,15 @@ class wmt:
             "alpha" not in vars(self) or "beta" not in vars(self) or self.teos10
         ) and "p" not in vars(self):
             self.p = xr.apply_ufunc(
-                gsw.p_from_z, -self.ds["lev"], self.ds["lat"], 0, 0, dask="parallelized"
+                gsw.p_from_z, -self.ds["lev"], self.ds["latitude"], 0, 0, dask="parallelized"
             )
         if self.teos10 and "sa" not in vars(self):
             self.sa = xr.apply_ufunc(
                 gsw.SA_from_SP,
                 self.ds["so"],
                 self.p,
-                self.ds["lon"],
-                self.ds["lat"],
+                self.ds["longitude"],
+                self.ds["latitude"],
                 dask="parallelized",
             )
         if self.teos10 and "ct" not in vars(self):
