@@ -49,7 +49,7 @@ def get_xgcm_grid_vertical(ds, metrics=True, **kwargs):
     print(coords)
     print(kwargs)
     
-    xgrid = xgcm.Grid(ds_g, coords=coords, **kwargs)
+    xgrid = xgcm.Grid(ds_g, coords=coords, autoparse_metadata=False, **kwargs)
     return xgrid
 
 
