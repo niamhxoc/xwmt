@@ -467,7 +467,7 @@ class swmt:
                             histogram(
                                 l.where(~np.isnan(F[tend])),
                                 bins=[bins],
-                                dim=["x", "y", "lev"],
+                                dim=["i", "j", "lev"],
                                 weights=(F[tend] * self.ds["areacello"]).where(
                                     ~np.isnan(F[tend])
                                 ),
@@ -493,7 +493,7 @@ class swmt:
                         histogram(
                             l.where(~np.isnan(F)),
                             bins=[bins],
-                            dim=["x", "y", "lev"],
+                            dim=["i", "j", "lev"],
                             weights=(F * self.ds["areacello"]).where(~np.isnan(F)),
                         )
                         / np.diff(bins)
@@ -507,7 +507,7 @@ class swmt:
                 lstr, bins=bins, mass=mass, salt=salt, heat=heat, decompose=decompose
             )
             if F_transformed is not None and len(F_transformed):
-                G = (F_transformed * self.ds["areacello"]).sum(["x", "y"])
+                G = (F_transformed * self.ds["areacello"]).sum(["i", "j"])
                 return G
             return F_transformed
 
