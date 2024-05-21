@@ -396,7 +396,7 @@ class swmt:
 
     def lbin_percentile(self, l, percentile=[0.05, 0.95], bins=30):
         """Specify the percentile and number of the bins"""
-        l_sample = l.isel(time=0).chunk({"y": -1, "x": -1})
+        l_sample = l.isel(time=0).chunk({"j": -1, "i": -1})
         vmin, vmax = l_sample.quantile(percentile, dim=l_sample.dims)
         return np.linspace(vmin, vmax, bins)
 
