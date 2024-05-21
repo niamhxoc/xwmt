@@ -387,7 +387,7 @@ class wmt:
                             histogram(
                                 l.where(~np.isnan(F[tend])),
                                 bins=[bins],
-                                dim=["x", "y", "lev"],
+                                dim=["i", "j", "lev"],
                                 weights=(F[tend] * self.ds["areacello"]).where(
                                     ~np.isnan(F[tend])
                                 ),
@@ -414,7 +414,7 @@ class wmt:
                         histogram(
                             l.where(~np.isnan(F)),
                             bins=[bins],
-                            dim=["x", "y", "lev"],
+                            dim=["i", "j", "lev"],
                             weights=(F * self.ds["areacello"]).where(~np.isnan(F)),
                         )
                         / np.diff(bins)
@@ -426,7 +426,7 @@ class wmt:
         elif method == "xgcm":
             F_transformed = self.calc_F_transformed(lstr, term, bins=bins)
             if F_transformed is not None and len(F_transformed):
-                G = (F_transformed * self.ds["areacello"]).sum(["x", "y"])
+                G = (F_transformed * self.ds["areacello"]).sum(["i", "j"])
                 # rename dataarray only (not dataset)
                 if isinstance(G, xr.DataArray):
                     return G.rename(F_transformed.name)
