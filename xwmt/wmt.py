@@ -44,6 +44,12 @@ class wmt:
         """
 
         self.ds = ds.copy()
+        # Modify ds to use a pseudo vertical grid
+        if (
+            "lev_outer" not in self.ds
+        ):  # TODO: Find a better way to check vertical dimensions using both lev_outer and lev
+            self.ds["lev_outer"] = xr.DataArray(np.insert(np.append(ds['lev'][:-1].values + (ds['lev'][1:].values-ds['lev'][:-1].values)/2, 6000),0,0), dims='lev_outer')
+            
         self.xgrid = get_xgcm_grid_vertical(self.ds, periodic=False)
         self.Cp = Cp
         self.rho = rho
