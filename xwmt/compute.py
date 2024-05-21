@@ -8,8 +8,8 @@ from xhistogram.xarray import histogram
 
 
 def zonal_mean(da, metrics):
-    num = (da * metrics["areacello"] * metrics["wet"]).sum(dim=["x"])
-    denom = (da / da * metrics["areacello"] * metrics["wet"]).sum(dim=["x"])
+    num = (da * metrics["areacello"] * metrics["wet"]).sum(dim=["i"])
+    denom = (da / da * metrics["areacello"] * metrics["wet"]).sum(dim=["i"])
     return num / denom
 
 
@@ -275,7 +275,7 @@ def calc_G(F, l, grid, bins, method="xhistogram"):
         G = histogram(
             l.where(~np.isnan(F)),
             bins=[bins],
-            dim=["x", "y", "lev"],
+            dim=["i", "j", "lev"],
             weights=(F * grid["areacello"]).where(~np.isnan(F)),
         ) / np.diff(bins)
 
@@ -284,7 +284,7 @@ def calc_G(F, l, grid, bins, method="xhistogram"):
         G = (
             calc_F_transformed(F, l.copy().rename(l.name + "_bin"), xgrid, bins)
             * grid["areacello"]
-        ).sum(["x", "y"])
+        ).sum(["i", "j"])
 
     return G
 
@@ -296,7 +296,7 @@ def lbin_define(lmin, lmax, delta_l):
 
 def lbin_percentile(l, percentile=[0.05, 0.95], nbins=100):
     """Specify the percentile and number of the bins"""
-    l_sample = l.isel(lev=0, time=0).chunk({"y": -1, "x": -1})
+    l_sample = l.isel(lev=0, time=0).chunk({"j": -1, "i": -1})
     vmin, vmax = l_sample.quantile(percentile, dim=l_sample.dims)
     return np.linspace(vmin, vmax, nbins)
 
