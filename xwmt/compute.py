@@ -31,7 +31,7 @@ def get_xgcm_grid_vertical(ds, metrics=True, **kwargs):
 
     # Copy static grid dataset variables
     ds_g = ds[["lev", "lev_outer"]].copy()
-    print(ds_g)
+
     # Define coordinates
     coords = {"Z": {"center": "lev", "outer": "lev_outer"}}
 
@@ -44,10 +44,6 @@ def get_xgcm_grid_vertical(ds, metrics=True, **kwargs):
         # Replace all NaNs with zeros
         ds_g["dzt"] = ds_g["dzt"].fillna(0.0)
         kwargs["metrics"] = {("Z",): ["dzt"]}
-    
-    print(ds_g)
-    print(coords)
-    print(kwargs)
     
     xgrid = xgcm.Grid(ds_g, coords=coords, autoparse_metadata=False, **kwargs)
     return xgrid
