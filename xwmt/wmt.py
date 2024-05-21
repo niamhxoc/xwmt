@@ -563,7 +563,7 @@ class wmt:
         group_tend = kwargs.pop("group_tend", True)
         # call the base function
         G = self.calc_G(lstr, *args, **kwargs)
-
+        print(G)
         # process this function arguments
         if group_process == True and group_tend == False:
             G = self._group_process(G)
