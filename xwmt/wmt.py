@@ -325,7 +325,7 @@ class wmt:
 
         # Interpolate lambda to the cell interfaces
         l_i = (
-            self.xgrid.interp(l, "Z", boundary="extrapolate")
+            self.xgrid.interp(l, "Z", boundary="extend")
             .chunk({"lev_outer": -1})
             .rename(l.name)
         )
@@ -376,6 +376,7 @@ class wmt:
 
         if method == "xhistogram" and lstr in self.lambdas("density"):
             F, l = self.calc_Fl(lstr, term)
+            print(F)
             if bins is None and l is not None:
                 bins = lbin_percentile(
                     l
@@ -563,7 +564,7 @@ class wmt:
         group_tend = kwargs.pop("group_tend", True)
         # call the base function
         G = self.calc_G(lstr, *args, **kwargs)
-        print(G)
+        
         # process this function arguments
         if group_process == True and group_tend == False:
             G = self._group_process(G)
