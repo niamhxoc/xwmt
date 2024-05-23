@@ -325,11 +325,10 @@ class wmt:
 
         # Interpolate lambda to the cell interfaces
         l_i = (
-            self.xgrid.interp(l, "Z", boundary=None)
-            .chunk({"lev_outer": -1})
+            self.xgrid.interp(l, "Z", boundary='extend')
             .rename(l.name)
         )
-
+        #.chunk({"lev_outer": -1})
         if lstr in self.lambdas("density"):
             F_transformed = []
             for tend in self.terms_dict.keys():
