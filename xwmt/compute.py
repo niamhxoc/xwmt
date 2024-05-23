@@ -44,8 +44,8 @@ def get_xgcm_grid_vertical(ds, metrics=True, **kwargs):
         # Replace all NaNs with zeros
         ds_g["dzt"] = ds_g["dzt"].fillna(0.0)
         kwargs["metrics"] = {("Z",): ["dzt"]}
-    
-    xgrid = xgcm.Grid(ds_g, coords=coords, autoparse_metadata=False, **kwargs)
+    # autoparse_metadata=False,
+    xgrid = xgcm.Grid(ds_g, coords=coords,  **kwargs)
     return xgrid
 
 
