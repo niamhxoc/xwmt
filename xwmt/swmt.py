@@ -127,7 +127,8 @@ class swmt:
 
         # Create xgcm object with modified ds
         self.xgrid = get_xgcm_grid_vertical(self.ds, metrics=True, periodic=False)
-
+        print(self.xgrid)
+        
     # Helper function to get variable name for given tendency
     def tend(self, tendency):
         return self.terms_dict.get(tendency, None)
