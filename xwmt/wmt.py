@@ -322,7 +322,7 @@ class wmt:
             bins = lbin_percentile(
                 l
             )  # automatically find the right range based on the distribution in l
-            
+        print(self.xgrid)     
         # Interpolate lambda to the cell interfaces
         l_i = (
             self.xgrid.interp(l, "Z", boundary='extend')
