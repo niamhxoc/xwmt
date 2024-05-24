@@ -214,9 +214,9 @@ def calc_hldot_tendency(xgrid, dd):
 
 ### Standalone and scaled-down version of ddterms functions for testing
 def get_density(ds, grid, density_str="sigma0"):
-    p = xr.apply_ufunc(gsw.p_from_z, -ds["lev"], grid["lat"], 0, 0, dask="parallelized")
+    p = xr.apply_ufunc(gsw.p_from_z, -ds["lev"], grid["latitude"], 0, 0, dask="parallelized")
     sa = xr.apply_ufunc(
-        gsw.SA_from_SP, ds["so"], p, grid["lon"], grid["lat"], dask="parallelized"
+        gsw.SA_from_SP, ds["so"], p, grid["longitude"], grid["latitude"], dask="parallelized"
     )
     ct = xr.apply_ufunc(gsw.CT_from_t, sa, ds["thetao"], p, dask="parallelized")
 
