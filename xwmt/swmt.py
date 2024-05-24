@@ -223,7 +223,7 @@ class swmt:
             self.p = xr.apply_ufunc(
                 gsw.p_from_z,
                 -self.ds["lev_outer"],
-                self.ds["lat"],
+                self.ds["latitude"],
                 0,
                 0,
                 dask="parallelized",
@@ -236,8 +236,8 @@ class swmt:
                 .where(self.ds["lev_outer"] == 0)
                 .where(self.ds["wet"] == 1),
                 self.p,
-                self.ds["lon"],
-                self.ds["lat"],
+                self.ds["longitude"],
+                self.ds["latitude"],
                 dask="parallelized",
             )
         # Calculate conservative temperature (degC)
