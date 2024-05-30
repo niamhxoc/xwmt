@@ -325,8 +325,8 @@ class wmt:
         print(self.xgrid)     
         # Interpolate lambda to the cell interfaces
         l_i = (
-            self.chunk({"lev_outer": self.shape[self.dims.index(lev_outer)]})
-            .xgrid.interp(l, "Z", boundary='extend')
+            self.xgrid.interp(l.chunk({"lev_outer": -1}), "Z", boundary='extend')
+            .chunk({"lev_outer": -1})
             .rename(l.name)
         )
         #.chunk({"lev_outer": -1})
