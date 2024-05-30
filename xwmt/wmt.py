@@ -322,11 +322,11 @@ class wmt:
             bins = lbin_percentile(
                 l
             )  # automatically find the right range based on the distribution in l
-        print(self.xgrid)     
+        print(term)
         # Interpolate lambda to the cell interfaces
-        self.xgrid = self.xgrid.chunk({"lev_outer": -1})
         l_i = (
             self.xgrid.interp(l, "Z", boundary='extend')
+            .chunk({"lev_outer": -1})
             .rename(l.name)
         )
         #.chunk({"lev_outer": -1})
@@ -505,7 +505,7 @@ class wmt:
         """
         Wrapper function for calc_F_transformed() to group terms based on tendency terms (heat, salt) and processes.
         """
-
+        
         # If term is not given, use all available process terms
         if term is None:
             Fs = []
