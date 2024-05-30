@@ -324,9 +324,9 @@ class wmt:
             )  # automatically find the right range based on the distribution in l
         print(self.xgrid)     
         # Interpolate lambda to the cell interfaces
+        self.xgrid = self.xgrid.chunk({"lev_outer": -1})
         l_i = (
             self.xgrid.interp(l, "Z", boundary='extend')
-            .chunk({"lev_outer": -1})
             .rename(l.name)
         )
         #.chunk({"lev_outer": -1})
