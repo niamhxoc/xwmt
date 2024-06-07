@@ -229,7 +229,6 @@ class swmt:
                 dask="parallelized",
             )
 
-        print(self.p)
         # Calculate absolute salinity (g/kg)
         if self.teos10 and "sa" not in vars(self):
             self.sa = xr.apply_ufunc(
@@ -253,6 +252,7 @@ class swmt:
                 self.p,
                 dask="parallelized",
             )
+        print(self.ct)
         if not self.teos10 and ("sa" not in vars(self) or "ct" not in vars(self)):
             self.sa = self.ds.so
             self.ct = self.ds.thetao
