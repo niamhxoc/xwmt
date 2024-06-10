@@ -116,8 +116,8 @@ class swmt:
         if (
             "lev_outer" not in self.ds
         ):  # TODO: Find a better way to check vertical dimensions using both lev_outer and lev
-            self.ds["lev_outer"] = xr.DataArray(np.array([0.0, 5.0]), dims="lev_outer")
-            self.ds["lev"] = xr.DataArray(np.array([2.5]), dims="lev")
+            self.ds["lev_outer"] = xr.DataArray(np.array([0.0, 1.024]), dims="lev_outer")
+            self.ds["lev"] = xr.DataArray(np.array([0.506]), dims="lev")
             for var in self.ds.keys():
                 if var in self.variables:
                     self.ds[var] = expand_surface_to_3D(
